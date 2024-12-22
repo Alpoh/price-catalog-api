@@ -31,8 +31,8 @@ class PriceServiceImplTest {
     @BeforeEach
     void setUp() {
         mocks = MockitoAnnotations.openMocks(this);
-        priceService = new PriceServiceImpl(priceRepository);
         priceMock = List.of(new Price(1, LocalDateTime.now(), LocalDateTime.now().plusDays(1), 1, 35455, 1, 40.00, "EUR"));
+        priceService = new PriceServiceImpl(priceRepository);
     }
 
     @AfterEach
