@@ -1,0 +1,29 @@
+services:
+  price-catalog-api:
+    image: openjdk:17-jdk-slim
+    container_name: price-catalog-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.H2Dialect
+      SPRING_H2_CONSOLE_ENABLED: "true"
+      SPRING_H2_CONSOLE_PATH: /h2-console
+    depends_on:
+      - h2-db
+
+  h2-db:
+    image: oscarfonts/h2
+    container_name: h2-db
+    ports:
+      - "9092:9092"
+      - "8082:8082"
+    environment:
+      H2_OPTIONS: '-ifNotExists'
