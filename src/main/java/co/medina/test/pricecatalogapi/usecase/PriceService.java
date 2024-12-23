@@ -1,9 +1,10 @@
 package co.medina.test.pricecatalogapi.usecase;
 
-import co.medina.test.pricecatalogapi.domain.Price;
+import co.medina.test.pricecatalogapi.adapter.controller.dto.PriceDTO;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 public interface PriceService {
-    List<Price> findByBrandIdAndProductId(Integer brandId, Integer productId);
+
+    PriceDTO findByBrandIdAndProductIdAndDate(Integer brandId, Integer productId, LocalDateTime requestDate);
 }
