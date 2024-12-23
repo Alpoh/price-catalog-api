@@ -42,19 +42,88 @@ class PriceControllerTest {
     }
 
     @Test
-    void findByBrandIdAndProductId() throws Exception {
-        PriceDTO priceMock = new PriceDTO(35455,1, 1, LocalDateTime.now(), LocalDateTime.now().plusDays(1), 40.00);
-        Mockito.when(priceService.findByBrandIdAndProductIdAndDate(Mockito.anyInt(), Mockito.anyInt(), Mockito.any(LocalDateTime.class))).thenReturn(priceMock);
+    void test1_findPrice_at_10am_on_14th() throws Exception {
+        LocalDateTime requestDate = LocalDateTime.of(2020, 6, 14, 10, 0);
+        PriceDTO mockPriceDTO = new PriceDTO(35455, 1, 1, LocalDateTime.of(2020, 6, 14, 10, 0), LocalDateTime.of(2020, 6, 14, 20, 0), 40.00);
 
-        priceController.findByBrandIdAndProductIdAndDate(1, 35455, LocalDateTime.now());
+        Mockito.when(priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate)).thenReturn(mockPriceDTO);
+
+        priceController.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/price")
                         .param("brandId", "1")
                         .param("productId", "35455")
-                        .param("requestDate", "2020-06-14T10:00:00")
-                        .accept(MediaType.APPLICATION_JSON))
+                        .param("requestDate", requestDate.toString()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
-
     }
+
+    @Test
+    void test2_findPrice_at_16pm_on_14th() throws Exception {
+        LocalDateTime requestDate = LocalDateTime.of(2020, 6, 14, 16, 0);
+        PriceDTO mockPriceDTO = new PriceDTO(35455, 1, 1, LocalDateTime.of(2020, 6, 14, 10, 0), LocalDateTime.of(2020, 6, 14, 20, 0), 35.50);
+
+        Mockito.when(priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate)).thenReturn(mockPriceDTO);
+
+        priceController.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/price")
+                        .param("brandId", "1")
+                        .param("productId", "35455")
+                        .param("requestDate", requestDate.toString()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    void test3_findPrice_at_21pm_on_14th() throws Exception {
+        LocalDateTime requestDate = LocalDateTime.of(2020, 6, 14, 21, 0);
+        PriceDTO mockPriceDTO = new PriceDTO(35455, 1, 1, LocalDateTime.of(2020, 6, 14, 21, 0), LocalDateTime.of(2020, 6, 15, 18, 0), 30.00);
+
+        Mockito.when(priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate)).thenReturn(mockPriceDTO);
+
+        priceController.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/price")
+                        .param("brandId", "1")
+                        .param("productId", "35455")
+                        .param("requestDate", requestDate.toString()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    void test4_findPrice_at_10am_on_15th() throws Exception {
+        LocalDateTime requestDate = LocalDateTime.of(2020, 6, 15, 10, 0);
+        PriceDTO mockPriceDTO = new PriceDTO(35455, 1, 1, LocalDateTime.of(2020, 6, 15, 8, 0), LocalDateTime.of(2020, 6, 15, 18, 0), 25.00);
+
+        Mockito.when(priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate)).thenReturn(mockPriceDTO);
+
+        priceController.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/price")
+                        .param("brandId", "1")
+                        .param("productId", "35455")
+                        .param("requestDate", requestDate.toString()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    void test5_findPrice_at_21pm_on_16th() throws Exception {
+        LocalDateTime requestDate = LocalDateTime.of(2020, 6, 16, 21, 0);
+        PriceDTO mockPriceDTO = new PriceDTO(35455, 1, 1, LocalDateTime.of(2020, 6, 16, 19, 0), LocalDateTime.of(2020, 6, 16, 22, 0), 20.00);
+
+        Mockito.when(priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate)).thenReturn(mockPriceDTO);
+
+        priceController.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/price")
+                        .param("brandId", "1")
+                        .param("productId", "35455")
+                        .param("requestDate", requestDate.toString()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+    }
+
 }

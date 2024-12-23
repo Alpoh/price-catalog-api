@@ -11,12 +11,13 @@ import java.util.Optional;
 
 @Repository
 public interface PriceRepository extends JpaRepository<Price, Integer> {
-    @Query(value = "SELECT p FROM Price p " +
-            "WHERE p.brandId = :brandId " +
-            "AND p.productId = :productId " +
-            "AND p.startDate <= :requestDate " +
-            "AND p.endDate >= :requestDate " +
-            "ORDER BY p.priority DESC")
+    @Query(value = "SELECT p.* FROM Price p " +
+            "WHERE p.brand_id = :brandId " +
+            "AND p.product_id = :productId " +
+            "AND p.start_date <= :requestDate " +
+            "AND p.end_date >= :requestDate " +
+            "ORDER BY p.priority DESC " +
+            "LIMIT 1", nativeQuery = true)
     Optional<Price> findFirstByBrandIdAndProductIdAndDate(
             @Param("brandId") Integer brandId,
             @Param("productId") Integer productId,
