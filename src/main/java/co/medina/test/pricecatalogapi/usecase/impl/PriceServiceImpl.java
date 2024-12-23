@@ -1,14 +1,15 @@
 package co.medina.test.pricecatalogapi.usecase.impl;
 
+import co.medina.test.pricecatalogapi.adapter.controller.dto.PriceDTO;
 import co.medina.test.pricecatalogapi.adapter.persistence.PriceRepository;
-import co.medina.test.pricecatalogapi.domain.Price;
+import co.medina.test.pricecatalogapi.domain.mappers.PriceMapper;
 import co.medina.test.pricecatalogapi.usecase.PriceService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
 @Transactional
@@ -18,8 +19,11 @@ public class PriceServiceImpl implements PriceService {
     private final PriceRepository priceRepository;
 
     @Override
-    public List<Price> findByBrandIdAndProductId(Integer brandId, Integer productId) {
-        log.debug("PriceServiceImpl.findByBrandIdAndProductId: brandId::{}, productId::{}", brandId, productId);
-        return priceRepository.findByBrandIdAndProductId(brandId, productId);
+    public PriceDTO findByBrandIdAndProductIdAndDate(Integer brandId, Integer productId, LocalDateTime requestDate) {
+        log.debug("Service fetching price for brand ID:: {}, product ID:: {} and request Date:: {}", brandId, productId, requestDate);
+
+        return priceRepository.findFirstByBrandIdAndProductIdAndDate(brandId, productId, requestDate)
+                .map(PriceMapper.INSTANCE::toDto)
+                .orElse(null);
     }
 }

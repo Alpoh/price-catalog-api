@@ -1,4 +1,4 @@
-package co.medina.test.pricecatalogapi.domain;
+package co.medina.test.pricecatalogapi.domain.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
