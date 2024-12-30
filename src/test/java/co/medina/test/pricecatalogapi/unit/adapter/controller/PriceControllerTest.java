@@ -1,5 +1,6 @@
-package co.medina.test.pricecatalogapi.adapter.controller;
+package co.medina.test.pricecatalogapi.unit.adapter.controller;
 
+import co.medina.test.pricecatalogapi.adapter.controller.PriceController;
 import co.medina.test.pricecatalogapi.adapter.controller.dto.PriceDTO;
 import co.medina.test.pricecatalogapi.usecase.PriceService;
 import org.junit.jupiter.api.BeforeEach;
