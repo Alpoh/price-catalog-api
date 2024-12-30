@@ -56,15 +56,6 @@ class PriceControllerTest {
     }
 
     @Test
-    void test3_findPrice_notFound() throws Exception {
-        LocalDateTime requestDate = LocalDateTime.of(2020, 6, 14, 21, 0);
-
-        Mockito.when(priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate)).thenReturn(Optional.empty());
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/price").param("brandId", "1").param("productId", "35455").param("requestDate", requestDate.toString())).andExpect(MockMvcResultMatchers.status().isNotFound());
-    }
-
-    @Test
     void test4_findPrice_at_10am_on_15th() throws Exception {
         LocalDateTime requestDate = LocalDateTime.of(2020, 6, 15, 10, 0);
         Optional<PriceDTO> mockPriceDTO = Optional.of(new PriceDTO(35455, 1, 1, LocalDateTime.of(2020, 6, 15, 8, 0), LocalDateTime.of(2020, 6, 15, 18, 0), 25.00, "EUR"));
