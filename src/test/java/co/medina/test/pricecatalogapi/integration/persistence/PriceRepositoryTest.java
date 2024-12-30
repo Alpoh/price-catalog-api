@@ -1,5 +1,6 @@
-package co.medina.test.pricecatalogapi.adapter.persistence;
+package co.medina.test.pricecatalogapi.integration.persistence;
 
+import co.medina.test.pricecatalogapi.adapter.persistence.PriceRepository;
 import co.medina.test.pricecatalogapi.domain.entities.Price;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

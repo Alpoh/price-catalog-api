@@ -1,8 +1,9 @@
-package co.medina.test.pricecatalogapi.usecase.impl;
+package co.medina.test.pricecatalogapi.unit.usecase.adapter.impl;
 
 import co.medina.test.pricecatalogapi.adapter.controller.dto.PriceDTO;
 import co.medina.test.pricecatalogapi.adapter.persistence.PriceRepository;
 import co.medina.test.pricecatalogapi.domain.entities.Price;
+import co.medina.test.pricecatalogapi.usecase.impl.PriceServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,7 +47,7 @@ class PriceServiceImplTest {
         Optional<Price> priceMock = Optional.of(new Price(1, startDate, endDate, 1, 35455, 1, 35.50, "EUR"));
         Mockito.when(priceRepository.findFirstByBrandIdAndProductIdAndDate(Mockito.anyInt(), Mockito.anyInt(), Mockito.any(LocalDateTime.class))).thenReturn(priceMock);
 
-        PriceDTO pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
+        Optional<PriceDTO> pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
         Assertions.assertNotNull(pricesResponse);
     }
 
@@ -58,7 +59,7 @@ class PriceServiceImplTest {
         Optional<Price> priceMock = Optional.of(new Price(1, startDate, endDate, 1, 35455, 1, 25.45, "EUR"));
         Mockito.when(priceRepository.findFirstByBrandIdAndProductIdAndDate(Mockito.anyInt(), Mockito.anyInt(), Mockito.any(LocalDateTime.class))).thenReturn(priceMock);
 
-        PriceDTO pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
+        Optional<PriceDTO> pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
         Assertions.assertNotNull(pricesResponse);
     }
 
@@ -70,7 +71,7 @@ class PriceServiceImplTest {
         Optional<Price> priceMock = Optional.of(new Price(1, startDate, endDate, 1, 35455, 1, 35.50, "EUR"));
         Mockito.when(priceRepository.findFirstByBrandIdAndProductIdAndDate(Mockito.anyInt(), Mockito.anyInt(), Mockito.any(LocalDateTime.class))).thenReturn(priceMock);
 
-        PriceDTO pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
+        Optional<PriceDTO> pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
         Assertions.assertNotNull(pricesResponse);
     }
 
@@ -82,7 +83,7 @@ class PriceServiceImplTest {
         Optional<Price> priceMock = Optional.of(new Price(1, startDate, endDate, 1, 35455, 1, 30.50, "EUR"));
         Mockito.when(priceRepository.findFirstByBrandIdAndProductIdAndDate(Mockito.anyInt(), Mockito.anyInt(), Mockito.any(LocalDateTime.class))).thenReturn(priceMock);
 
-        PriceDTO pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
+        Optional<PriceDTO> pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
         Assertions.assertNotNull(pricesResponse);
     }
 
@@ -94,7 +95,7 @@ class PriceServiceImplTest {
         Optional<Price> priceMock = Optional.of(new Price(1, startDate, endDate, 1, 35455, 1, 38.95, "EUR"));
         Mockito.when(priceRepository.findFirstByBrandIdAndProductIdAndDate(Mockito.anyInt(), Mockito.anyInt(), Mockito.any(LocalDateTime.class))).thenReturn(priceMock);
 
-        PriceDTO pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
+        Optional<PriceDTO> pricesResponse = priceService.findByBrandIdAndProductIdAndDate(1, 35455, requestDate);
         Assertions.assertNotNull(pricesResponse);
     }
 

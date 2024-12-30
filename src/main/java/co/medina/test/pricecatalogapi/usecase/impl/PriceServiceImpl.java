@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -19,11 +20,10 @@ public class PriceServiceImpl implements PriceService {
     private final PriceRepository priceRepository;
 
     @Override
-    public PriceDTO findByBrandIdAndProductIdAndDate(Integer brandId, Integer productId, LocalDateTime requestDate) {
+    public Optional<PriceDTO> findByBrandIdAndProductIdAndDate(Integer brandId, Integer productId, LocalDateTime requestDate) {
         log.debug("Service fetching price for brand ID:: {}, product ID:: {} and request Date:: {}", brandId, productId, requestDate);
 
         return priceRepository.findFirstByBrandIdAndProductIdAndDate(brandId, productId, requestDate)
-                .map(PriceMapper.INSTANCE::toDto)
-                .orElse(null);
+                .map(PriceMapper.INSTANCE::toDto);
     }
 }

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +33,11 @@ public class PriceController {
             @Parameter(description = "ID of the brand") @RequestParam("brandId") Integer brandId,
             @Parameter(description = "ID of the product") @RequestParam("productId") Integer productId,
             @Parameter(description = "Request date") @RequestParam("requestDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime requestDate) {
+
         log.debug("Controller fetching price for brand ID:: {}, product ID:: {} and request Date:: {}", brandId, productId, requestDate);
-        PriceDTO price = priceService.findByBrandIdAndProductIdAndDate(brandId, productId,requestDate);
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(price);
+
+        return priceService.findByBrandIdAndProductIdAndDate(brandId, productId, requestDate)
+                .map(price -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(price))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }
