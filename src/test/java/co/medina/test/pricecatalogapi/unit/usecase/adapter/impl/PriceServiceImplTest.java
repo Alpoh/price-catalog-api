@@ -1,8 +1,9 @@
-package co.medina.test.pricecatalogapi.usecase.impl;
+package co.medina.test.pricecatalogapi.unit.usecase.adapter.impl;
 
 import co.medina.test.pricecatalogapi.adapter.controller.dto.PriceDTO;
 import co.medina.test.pricecatalogapi.adapter.persistence.PriceRepository;
 import co.medina.test.pricecatalogapi.domain.entities.Price;
+import co.medina.test.pricecatalogapi.usecase.impl.PriceServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

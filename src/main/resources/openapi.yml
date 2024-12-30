@@ -1,0 +1,111 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Price Controller",
+      "description": "Controller for managing prices"
+    }
+  ],
+  "paths": {
+    "/v1/api/price": {
+      "get": {
+        "tags": [
+          "Price Controller"
+        ],
+        "summary": "Get prices by brand, product ID and request date",
+        "description": "Retrieve a price for a specific brand, product and date.",
+        "operationId": "findByBrandIdAndProductIdAndDate",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "query",
+            "description": "ID of the brand",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "description": "ID of the product",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "requestDate",
+            "in": "query",
+            "description": "Request date",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PriceDTO": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "brand_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price_list": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "curr": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
